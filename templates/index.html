@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<title>Ninja Gold</title>
+	</head>
+	<style>
+		#wrapper {
+			overflow-y:auto;
+		}
+		#activitiesTable {
+			border-collapse: collapse;
+    		border-spacing: 0;
+    		width: 100%;
+    		border: 1px solid #ddd;
+		}
+		#activityRow {
+			color: {{session['color']}};
+		}
+	</style>
+	<body>
+		<h1>Ninja Gold</h1>
+		<div>
+			<form action="/restart" method="get">
+  				<input type="submit" value="Reset">
+			</form>
+		</div>
+		<br>
+		<br>
+		<h5>Your Gold: {{session['count']}}</h5>
+		<form action="/farmRand" method="POST">
+        	<button>Farm (earns 10-20 golds)</button>
+        </form>
+        <form action="/caveRand" method="POST">
+        	<button>Cave (earns 5-10 golds)</button>
+        </form>
+        <form action="/houseRand" method="POST">
+        	<button>House (earns 2-5 Golds)</button>
+        </form>
+        <form action="/casinoRand" method="POST">
+        	<button>Casino (earns/takes 0-50 golds)</button>
+        </form>
+        <br>
+        <br>
+        <table>
+        	{x% for i in range(0,{{session['xactivityList']}},1) %}
+        		<tr>{x{session['xz']}}</tr>
+        	{x% endfor %}
+	    </table>
+        <div id="wrapper">
+	        <table id="activitiesTable">
+	        	<tr>Activities:</tr>
+	        	<br>
+	        	<br>
+	        	<tr><h3 id="activityRow">You earned: {x{session['total']}} golds.</h3></tr>
+	        </table>
+	        <br>
+	        <br>
+	        <table>
+	        	<tr>{x{session['activityList']}}</tr>
+	        </table>
+	    </div>
+	     <div id="wrapper">
+	        <table id="activitiesTable">
+	        	<tr>Activities:</tr>
+	        	<br>
+	        	<br>
+	        	{% for i in {{session['activityList']}}: %}
+	        	<tr><h3 id="activityRow">{{i}}</h3></tr>
+	        	{% endfor % %}
+	        	<br>
+	        	<br>
+	        </table>
+	    </div>
+	</body>
+</html>
